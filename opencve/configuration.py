@@ -13,8 +13,9 @@ OPENCVE_WELCOME_FILES = os.environ.get("OPENCVE_WELCOME_FILES") or str(
     Path(OPENCVE_HOME) / "welcome_html"
 )
 
-# Load the configuration
-config = configparser.ConfigParser()
+# Load the configuration (allow use of env var in the config)
+# https://stackoverflow.com/a/26588269
+config = configparser.SafeConfigParser(os.environ)
 
 if Path(OPENCVE_CONFIG).exists():
     config.read(OPENCVE_CONFIG)
